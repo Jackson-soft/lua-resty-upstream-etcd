@@ -1,2 +1,2 @@
-local u = require "lua-resty-upstream-etcd.dyups"
+local u = require "dyups"
 u.init()

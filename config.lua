@@ -1,7 +1,7 @@
 local _M = {
-	etcd_host = '127.0.0.1',
+	etcd_host = "10.1.22.0",
 	etcd_port = 2379,
-	etcd_path = '/upstream',
+	etcd_path = "/upstream",
 	dump_file = "/tmp/nginx",
 	dict = ngx.shared.healthcheck,
 	check_type = "http",
@@ -11,7 +11,7 @@ local _M = {
 	check_rise = 2,
 	check_concurrency = 10,
 	check_fall = 3,
-	check_valid = {200,302},
+	check_valid = {200, 302}
 }
 
 return _M

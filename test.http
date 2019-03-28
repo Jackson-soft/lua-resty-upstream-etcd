@@ -1,0 +1,4 @@
+curl http://10.1.22.0:2379/v2/keys/upstream/test-api/10.1.130.115:8081 -XPUT -d value="{"host":"10.1.130.115","port":"8081","status":"up","weight":10}"
+
+###
+curl http://10.1.22.0:2379/v2/keys/upstream/test-api/10.1.130.115:8081
