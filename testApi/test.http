@@ -1,0 +1,42 @@
+@etcdBasic = http://10.1.22.104:2379/v3beta
+@etcdPut = kv/put
+@etcdGet = kv/range
+@etcdWatch = watch
+@etcdDel = kv/deleterange
+
+###
+curl http://10.1.21.102:2379/version
+
+###
+curl -L {{etcdBasic}}/{{etcdGet}} -X POST -d '{"key": "Zm9v"}'
+
+###
+curl -L {{etcdBasic}}/{{etcdPut}} -X POST -d '{"key": "Zm9v", "value": "YmFy"}'
+
+###
+curl -N {{etcdBasic}}/{{etcdWatch}} -X POST -d '{"create_request": {"key":"Zm9v"} }'
+
+###
+curl --no-buffer http://10.1.22.0:2379/v3beta/watch -X POST -d '{"create_request": {"key":"Zm9v", "start_revision": "13470"} }'
+
+###
+curl -L {{etcdBasic}}/{{etcdDel}} -X POST  -d '{"key": "Zm9v"}'
+
+###
+POST http://10.1.22.0:2379/v3beta/put
+Content-Type: application/json
+
+{"key": "dXBzdHJlYW0vMTAuMS4yMi4wOjgwODA=", "value": "eyJ3ZWlnaHQiOiA0LCAic3RhdHVzIjogInVwIn0="}
+
+###
+POST http://10.1.21.102:2379/v3beta/watch
+Content-Type: application/json
+
+{
+    "create_request": {
+        "key": "dXBzdHJlYW0vMTAuMS4yMi4wOjgwODA="
+    }
+}
+
+###
+curl -L {{etcdBasic}}/{{etcdGet}} -X POST -d '{"key": "dXBzdHJlYW0vMTAuMS4yMi4wOjgwODA="}'

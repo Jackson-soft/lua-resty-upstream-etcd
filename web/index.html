@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <script type="text/javascript" src="demo.js"></script>
+    </head>
+    <body>
+        <div>
+            <p>key: <input id="getKey" type="text" size="50" /></p>
+            <p><input id="getPrefix" type="checkbox" checked />前缀</p>
+            <button type="submit" onclick="onGet()">查看</button>
+            <br />
+            <div id="myTable"></div>
+        </div>
+        <p>------------------------------------------------------------------------------------</p>
+        <div>
+            <p>key: <input id="modKey" type="text" size="50" required="required" /></p>
+            <p>value: <input id="modValue" type="text" size="100" /></p>
+            <button type="submit" onclick="onMod()">修改</button>
+        </div>
+        <p>------------------------------------------------------------------------------------</p>
+        <div>
+            <p>key:<input id="delKey" type="text" size="50" required="required" /></p>
+            <p><input id="delPrefix" type="checkbox" />前缀</p>
+            <button type="submit" onclick="onDel()">删除</button>
+        </div>
+    </body>
+</html>

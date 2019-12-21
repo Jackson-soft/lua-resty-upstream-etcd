@@ -1,0 +1,37 @@
+#+TITLE: /Nginx/ 编译依赖
+* 基本的编译环境
++ [[http://nginx.org/]]
++ [[https://github.com/openresty/lua-nginx-module/releases]]
++ [[https://github.com/simplresty/ngx_devel_kit/releases]]
++ [[https://github.com/openresty/luajit2/releases]]
+
+*这里要注意一下， /luajit/ 的库要用 /Openresty/ 官方维护分支的2.1+以上版本，而不使用2.0.5版本。*
+
+编译脚本：
+#+BEGIN_SRC shell
+  wget 'http://nginx.org/download/nginx-1.16.0.tar.gz'
+  tar -xzvf nginx-1.15.10.tar.gz
+  cd nginx-1.15.10/
+
+  # tell nginx's build system where to find LuaJIT 2.1:
+  export LUAJIT_LIB=/path/to/luajit/lib
+  export LUAJIT_INC=/path/to/luajit/include/luajit-2.1
+
+  # Here we assume Nginx is to be installed under /opt/nginx/.
+  ./configure --prefix=/opt/nginx \
+          --with-ld-opt="-Wl,-rpath,/path/to/luajit-or-lua/lib" \
+          --add-module=/path/to/ngx_devel_kit \
+          --add-module=/path/to/lua-nginx-module
+
+  # Note that you may also want to add `./configure` options which are used in your
+  # current nginx build.
+  # You can get usually those options using command nginx -V
+
+  # you can change the parallism number 2 below to fit the number of spare CPU cores in your
+  # machine.
+  make -j2
+  make install
+#+END_SRC
+* 第三方的包
++ [[https://github.com/openresty/lua-resty-balancer]]
++ [[https://github.com/ledgetech/lua-resty-http]]

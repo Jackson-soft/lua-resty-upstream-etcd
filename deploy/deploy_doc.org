@@ -1,0 +1,11 @@
+#+TITLE: 部署文档
+* 分支说明
+由于我本机开发时所用的环境是 /Openresty/ ,部署环境是用 /Nginx/ + /ngx_lua_module/ 的方式。所以 /gitlab/ 的分支分为主分
+支( /master/ )， 开发分支( /develop/ )， 部署分支( /deploy/ )。其中部署分支附带全部的 /Openresty/ 的 /lua/ 依赖(包括
+/lua/ 文件和 /so/ 文件)。
+* 目录说明
+[[./WechatIMG4493.png]]
+≈* 部署说明
+部署过程中需要修改的几个文件配置：
++ /lualib/lrue/config.lua/ 中的 /etcd_host/ 和 /etcd_port/ 两个值。在 /deploy/ 分支中 /config_prod.lua/ 有相关配置。
++ /web/demo.js/ 中的 /host/ 变量。在不同的环境中有不同的值，打开相应的注释即可。

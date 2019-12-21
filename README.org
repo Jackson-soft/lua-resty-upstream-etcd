@@ -1,0 +1,26 @@
+#+TITLE: /nginx/ 动态 /upstream/
+
+* 说明
+基于 [[https://github.com/level077/lua-resty-upstream-etcd]] 修改。
+
+整合了 /openresty/ 自身的健康检查及 /lua-resty-balancer/ 的 /rr/ ， /chash/ 负载均衡算法。
+
+/config.lua/ 是 /etcd/ 及健康检查的默认配置。
+
+* /nginx/ 配置示例
+
+[[./etcd.conf]]
+
+* /etcd/ 的键值模型
+#+BEGIN_SRC shell
+export ETCDCTL_API=3
+etcdctl put upstream/test-api/healthcheck '{"type": "http", "http_req": "HEAD / HTTP/1.0\r\n\r\n"}'
+etcdctl put upstream/test-api/10.1.22.0:8080 '{"weight": 4, "status": "up"}'
+etcdctl put upstream/test-api/10.1.22.1:8080 '{"weight": 4, "status": "up"}'
+#+END_SRC
+* 依赖
+[[https://github.com/openresty/lua-resty-balancer]]
+
+[[https://github.com/rrfeng/lua-resty-upstream-etcd]]
+
+[[https://github.com/openresty/lua-resty-upstream-healthcheck]]
